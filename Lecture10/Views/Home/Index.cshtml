@@ -1,0 +1,47 @@
+﻿
+@model ICollection<Lecture10.DAL.Domain.Group>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Список студентов</title>
+    <style>
+        .div {
+            border: 2px solid black;
+            padding: .5em;
+        }
+
+        .p1 {
+            font-size: 72px
+        }
+        
+    </style>
+</head>
+<body class="div">
+    <div>
+        <p1 class="p1"><img src="/Img/img1.png" width="125" height="85" /> Списки студентов</p1>
+    </div>
+    <div class="div">
+        @foreach (var group in Model)
+        {
+            <div class="row">
+                <table>
+                    <tr>
+                        <td><b>@group.Id - @group.Name (@group.Students.Count())</b></td><td><a href ="/Change/Index?groupId=@group.Id">Добавить студента</a></td>
+                    </tr>
+
+                </table>
+                @foreach (var student in group.Students)
+                {
+                    <table>
+                        <tr>
+                            <td>@student.FullName</td> <td><a href="/Change/Index?studentId=@student.Id">Редактировать</a></td><td><a href="/home/Delete?id=@student.Id">Удалить</a></td>
+                        </tr>
+                    </table>
+                }
+            </div>
+        }
+    </div>
+    
+</body>
+</html>

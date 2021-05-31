@@ -1,0 +1,60 @@
+﻿@model Lecture10.Models.StudentEditModel
+
+<head>
+    <meta charset="utf-8" />
+    <title>Изменение\Добавление студентов</title>
+    <style>
+        .div {
+            border: 2px solid black;
+            padding: .5em;
+        }
+
+        .p1 {
+            font-size: 72px
+        }
+        .p2 {
+            width: 170px;            
+        }
+        .btn {
+            display: inline-block;
+            background: #8C959D;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<html>
+<body class="div">
+    <div>
+        <p1 class="p1"><img src="/Img/img1.png" width="125" height="85" /> Списки студентов</p1>
+    </div>
+    <form method="post" action = "/Change/Save">
+        <div class="div">
+            <br><b>Студент</b>
+            <br><input type="hidden" value="@Model.Student.Id" name="studentId" />
+            <br>ФИО:<input type="text" name="flName" class="p2" value="@Model.Student.FullName" required />
+            <br>
+            <br>Группа:
+            <select class="p2" name="groupId">
+                @foreach (var group in Model.AllGroups)
+                {
+                    @if (group == Model.SelectedGroup)
+                    {
+                        <option selected value="@group.Id">@group.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@group.Id">@group.Name</option>
+                    }
+                }
+            </select>
+            <br>
+            <br>
+            <input type="submit" value="Сохранить" class="btn"/>
+            <a href="/Home/Index" class="btn">Отмена</a>
+        </div>
+    </form>
+</body>
+</html>
